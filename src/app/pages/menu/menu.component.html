@@ -1,0 +1,40 @@
+<section class="max-w-6xl mx-auto px-6 py-10">
+    <h2 class="text-4xl font-extrabold text-center mb-10">
+        🍽️ Nuestro Menú
+    </h2>
+
+    <div class="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+        <div *ngFor="let p of productos" class="bg-white rounded-2xl shadow-lg overflow-hidden
+             hover:shadow-2xl hover:scale-105 transition">
+
+            <!-- Imagen -->
+            <img [src]="p.imagen" [alt]="p.nombre" class="h-48 w-full object-cover">
+
+            <!-- Info -->
+            <div class="p-5 flex flex-col gap-3">
+                <h3 class="text-2xl font-bold">{{ p.nombre }}</h3>
+
+                <!-- Cantidad -->
+                <div class="flex items-center gap-3 mb-2">
+
+                    <label class="text-sm font-semibold text-gray-600 mb-1">
+                        Cantidad
+                    </label>
+
+                    <input type="number" min="1" [(ngModel)]="p.cantidad" class="border rounded-lg px-2 py-1 text-center text-lg
+                    focus:outline-none focus:ring-2 focus:ring-yellow-400">
+                </div>
+
+                <!-- Precio -->
+                <p class="text-xl font-bold text-gray-800 mb-4">
+                    $ {{ p.precio }}
+                </p>
+
+                <button (click)="agregar(p)" class="mt-auto bg-yellow-500 hover:bg-yellow-600
+                 text-white py-4 rounded-2xl font-bold text-lg transition active:scale-95">
+                    ➕ Agregar al pedido
+                </button>
+            </div>
+        </div>
+    </div>
+</section>

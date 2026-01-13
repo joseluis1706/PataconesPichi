@@ -1,0 +1,81 @@
+<!-- LOGIN -->
+<div *ngIf="!adminAutorizado" class="min-h-screen flex items-center justify-center bg-gray-100">
+
+    <div class="bg-white p-8 rounded-2xl shadow-lg w-full max-w-sm">
+        <h2 class="text-2xl font-bold mb-4 text-center">
+            🔒 Panel Administrativo
+        </h2>
+
+        <input type="password" [(ngModel)]="clave" placeholder="Clave" class="w-full p-4 border rounded-xl mb-4">
+        <p *ngIf="errorLogin" class="text-red-600 text-center font-semibold mb-3">
+            {{ errorLogin }}
+        </p>
+
+        <button type="button" (click)="entrar()" class="w-full bg-black text-white py-3 rounded-xl font-bold">
+            Entrar
+        </button>
+    </div>
+</div>
+
+
+<div class="max-w-5xl mx-auto p-6">
+    <h2 class="text-3xl font-extrabold mb-6">🧑‍💼 Administrar Productos</h2>
+
+    <!-- Crear producto -->
+    <div class="bg-white p-6 rounded-2xl shadow mb-8">
+        <h3 class="text-xl font-bold mb-4">➕ Nuevo producto</h3>
+
+        <input [(ngModel)]="nuevo.nombre" placeholder="Nombre" class="w-full p-3 mb-3 border rounded-xl">
+
+        <input type="number" [(ngModel)]="nuevo.precio" placeholder="Precio" class="w-full p-3 mb-3 border rounded-xl">
+
+        <input [(ngModel)]="nuevo.imagen" placeholder="URL o ruta de imagen" class="w-full p-3 mb-4 border rounded-xl">
+        <input type="file" accept="image/*" (change)="subirImagen($event, nuevo)"
+            class="w-full p-2 mb-3 border rounded-xl">
+
+        <button (click)="agregarProducto()" class="bg-green-500 text-white px-6 py-3 rounded-xl font-bold">
+            💾 Guardar producto
+        </button>
+    </div>
+</div>
+
+<!-- Lista de productos -->
+<div *ngIf="adminAutorizado" class="min-h-screen bg-gray-50 px-6 py-10">
+
+    <div class="max-w-5xl mx-auto">
+
+        <div class="flex justify-between items-center mb-8">
+            <h2 class="text-3xl font-extrabold">                
+                📦 Lista de productos
+            </h2>
+
+            <button (click)="logout()" class="text-red-600 font-bold">
+                🔓 Cerrar sesión
+            </button>
+        </div>
+
+        <div *ngFor="let p of productos" class="bg-white rounded-2xl shadow p-4 mb-6 grid grid-cols-1 md:grid-cols-4 gap-4">
+
+            <label class="text-sm font-semibold text-xs text-gray-600">Nombre</label>
+            <input [(ngModel)]="p.nombre" class="w-full p-3 mb-2 border rounded-xl">
+
+            <label class="text-sm font-semibold text-xs text-gray-600">Precio</label>
+            <input type="number" [(ngModel)]="p.precio" class="w-full p-3 mb-2 border rounded-xl">
+
+            <label class="text-sm font-semibold text-xs text-gray-600">Imagen</label>
+            <input [(ngModel)]="p.imagen" class="w-full p-3 border rounded-xl">
+            <img *ngIf="p.imagen" [src]="p.imagen" class="w-32 h-32 object-cover rounded-xl mt-2">
+
+            <input type="file" accept="image/*" (change)="subirImagen($event, p)" class="w-full p-2 mb-3 border rounded-xl">
+            <button (click)="eliminar(p.id)" class="mt-2 text-red-600 font-bold">
+                🗑 Eliminar
+            </button>
+        </div>
+
+        <button (click)="guardar()" class="bg-green-500 hover:bg-green-600
+             text-white px-6 py-3 rounded-xl font-bold">
+            💾 Guardar cambios
+        </button>
+    </div>
+
+</div>

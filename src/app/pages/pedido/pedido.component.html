@@ -1,0 +1,87 @@
+<section class="max-w-4xl mx-auto px-6 py-10">
+    <h2 class="text-4xl font-extrabold text-center mb-10">
+        🧾 Tu Pedido
+    </h2>
+
+    <!-- Si no hay productos -->
+    <p *ngIf="items.length === 0" class="text-center text-gray-500 text-xl">
+        Tu pedido está vacío 😕
+    </p>
+
+    <!-- Lista de productos -->
+    <div *ngFor="let item of items" class="flex flex-col sm:flex-row gap-4 items-center bg-white
+              rounded-2xl shadow-md p-4 mb-4">
+
+        <img [src]="item.producto.imagen" class="w-20 h-20 object-cover rounded-xl">
+
+        <div class="flex-1">
+            <h3 class="font-bold text-lg">{{ item.producto.nombre }}</h3>
+            <p class="text-gray-600">
+                $ {{ item.producto.precio }} x {{ item.cantidad }}
+            </p>
+        </div>
+
+        <div class="text-right">
+            <p class="font-bold text-lg">
+                $ {{ item.producto.precio * item.cantidad }}
+            </p>
+
+            <button (click)="eliminar(item.producto.id)" class="text-red-500 hover:text-red-700 text-xl">
+                ❌
+            </button>
+        </div>
+    </div>
+
+    <!-- Total -->
+    <div *ngIf="items.length > 0" class="bg-black text-white rounded-2xl p-6 mt-8
+              flex justify-between items-center text-xl font-bold">
+        <span>Total</span>
+        <span>$ {{ total }}</span>
+    </div>
+
+    <div class="bg-white rounded-2xl shadow-md p-6 mb-8">
+        <h3 class="text-2xl font-bold mb-4">🧑 Datos del cliente</h3>
+    
+        <input type="text" placeholder="Nombre completo" [(ngModel)]="nombre"  (ngModelChange)="guardarCliente()" class="w-full p-4 text-lg rounded-xl">
+    
+        <input type="text" placeholder="Dirección o referencia" [(ngModel)]="direccion"  (ngModelChange)="guardarCliente()"
+            class="w-full p-4 text-lg rounded-xl">
+    
+        <select [(ngModel)]="pago"  (ngModelChange)="guardarCliente()" class="w-full p-3 border rounded-xl">
+            <option value="Nequi">Nequi</option>
+            <option value="Al recibir">Pagar al recibir</option>
+        </select>
+    </div>
+
+
+    <!-- Botón WhatsApp -->
+    <button *ngIf="items.length > 0" (click)="enviarWhatsApp()" class="w-full mt-8 bg-green-500 hover:bg-green-600
+           text-white py-4 rounded-2xl text-xl font-bold transition">
+        📲 Enviar pedido por WhatsApp
+    </button>
+
+    <!-- Confirmación Pedido -->
+    <div *ngIf="pedidoEnviado" class="fixed inset-0 bg-black/70 flex justify-center items-center z-50">
+    
+        <div class="bg-white rounded-3xl p-10 text-center
+                  shadow-2xl animate-fade-up max-w-md">
+    
+            <div class="text-6xl mb-4">✅</div>
+    
+            <h3 class="text-3xl font-extrabold mb-3">
+                ¡Pedido enviado!
+            </h3>
+    
+            <p class="text-gray-600 mb-6">
+                Gracias por pedir en <b>Patacones el Pichi</b> 🍟
+                Te contactaremos pronto.
+            </p>
+    
+            <button routerLink="/" class="bg-yellow-500 hover:bg-yellow-600
+                 text-white px-6 py-3 rounded-xl font-bold transition">
+                Volver al inicio
+            </button>
+        </div>
+    </div>
+
+</section>

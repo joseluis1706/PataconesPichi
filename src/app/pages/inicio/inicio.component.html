@@ -1,0 +1,67 @@
+<section class="relative h-[90vh] bg-cover bg-center" style="background-image: url('assets/img/patacon.jpg');">
+
+    <!-- Overlay oscuro general -->
+<div class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-black/70"></div>
+
+
+    <!-- Contenido con glass effect -->
+    <div class="relative z-10 h-full flex justify-center items-center px-6">
+        <div class="bg-white/20 backdrop-blur-md rounded-2xl p-10 text-center text-white
+             shadow-2xl max-w-2xl animate-fade-up">
+
+            <h1 class="text-5xl md:text-6xl font-extrabold mb-4">
+                Patacones el Pichi 🍟
+            </h1>
+
+            <p class="text-xl md:text-2xl mb-8">
+                Patacones, Papas Rellenas y Picadas
+                <br>🔥 Directo a tu casa en Arjona 🔥
+            </p>
+
+            <div class="flex gap-4 flex-wrap justify-center">
+                <a routerLink="/menu" class="bg-yellow-500 hover:bg-yellow-600 text-white px-8 py-4
+                 rounded-xl font-bold text-lg transition">
+                    Ver Menú
+                </a>
+
+                <a routerLink="/pedido" class="bg-green-500 hover:bg-green-600 text-white px-8 py-4
+                 rounded-xl font-bold text-lg transition">
+                    Hacer Pedido
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="py-16 bg-yellow-50">
+    <h2 class="text-3xl font-bold text-center mb-10">
+        🍽️ Nuestros Favoritos
+    </h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 px-6 max-w-6xl mx-auto">
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+            <img src="/assets/img/papas.jpg" class="h-48 w-full object-cover">
+            <div class="p-4">
+                <h3 class="font-bold text-lg">Papas Rellenas</h3>
+                <!-- <p class="text-gray-600">$2.000</p> -->
+            </div>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+            <img src="/assets/img/picadapequeña.jpg" class="h-48 w-full object-cover">
+            <div class="p-4">
+                <h3 class="font-bold text-lg">Picadas</h3>
+                <!-- <p class="text-gray-600">Desde $6.000</p> -->
+            </div>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+            <img src="/assets/img/patacon.jpg" class="h-48 w-full object-cover">
+            <div class="p-4">
+                <h3 class="font-bold text-lg">Patacones Rellenos</h3>
+                <!-- <p class="text-gray-600">$2.500</p> -->
+            </div>
+        </div>
+    </div>
+</section>
