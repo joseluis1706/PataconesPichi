@@ -10,6 +10,7 @@ import { Producto } from '../../models/producto.model';
   imports: [CommonModule, FormsModule],
   templateUrl: './admin.component.html'
 })
+
 export class AdminComponent implements OnInit {
 
   adminAutorizado = false;
@@ -35,6 +36,7 @@ export class AdminComponent implements OnInit {
     this.productos = this.productoService.obtenerProductos();
   }
 
+  // Añadir nuevo producto
   agregarProducto() {
     this.nuevo.id = Date.now();
     this.productos.push({ ...this.nuevo });
@@ -43,11 +45,13 @@ export class AdminComponent implements OnInit {
     this.nuevo = { id: 0, nombre: '', precio: 0, imagen: '', cantidad: 1 };
   }
 
+  // Eliminar producto
   eliminar(id: number) {
     this.productos = this.productos.filter(p => p.id !== id);
     this.productoService.guardarProductos(this.productos);
   }
 
+  // Login administrador
   entrar() {
     if (this.clave.trim() === 'pichi123') {
       this.adminAutorizado = true;
@@ -59,17 +63,19 @@ export class AdminComponent implements OnInit {
     }
   }
 
-
+  // Guardar productos en localStorage
   guardar() {
     localStorage.setItem('productos', JSON.stringify(this.productos));
     alert('Productos guardados ✅');
   }
 
+  // Logout administrador
   logout() {
     localStorage.removeItem('admin');
     this.adminAutorizado = false;
   }
 
+  // Subir imagen
   subirImagen(event: any, producto: any) {
     const file = event.target.files[0];
 

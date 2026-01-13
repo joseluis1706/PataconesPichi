@@ -8,6 +8,7 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule],
   templateUrl: './toast.component.html'
 })
+
 export class ToastComponent {
   constructor(public toast: ToastService) { }
 }

@@ -4,6 +4,7 @@ import { Producto } from '../models/producto.model';
 @Injectable({
   providedIn: 'root'
 })
+
 export class ProductoService {
 
   private key = 'productos';
@@ -52,50 +53,16 @@ export class ProductoService {
       imagen: 'assets/img/jugos_2.jpg'
     }
   ];
-
+ 
+  // Obtener productos del localStorage o los productos por defecto
   obtenerProductos(): Producto[] {
     const data = localStorage.getItem(this.key);
     return data ? JSON.parse(data) : this.productosDefault;
   }
 
+  // Guardar productos en el localStorage
   guardarProductos(productos: Producto[]) {
     localStorage.setItem(this.key, JSON.stringify(productos));
   }
-
-  /* getProductos(): Producto[] {
-    const guardados = localStorage.getItem('productos');
-
-    if (guardados) {
-      const lista = JSON.parse(guardados);
-
-      // 🔥 Si está vacío, usar base
-      if (lista.length === 0) {
-        localStorage.setItem('productos', JSON.stringify(this.productosBase));
-        return this.productosBase;
-      }
-
-      return lista;
-    }
-
-    // Primera vez
-    localStorage.setItem('productos', JSON.stringify(this.productosBase));
-    return this.productosBase;
-  } */
-
-
-
- /*  getProductos(): Producto[] {
-    return this.productos;
-  } */
-
-  /* getProductos() {
-    const guardados = localStorage.getItem('productos');
-
-    if (guardados) {
-      return JSON.parse(guardados);
-    }
-
-    return this.productosBase;
-  } */
 
 }

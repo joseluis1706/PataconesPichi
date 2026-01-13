@@ -98,16 +98,18 @@ export class CarritoService {
     this.limpiarCarrito();
   }
 
-
+// Guardar cliente
 guardarCliente(nombre: string, direccion: string, pago: string) {
   this.cliente = { nombre, direccion, pago };
   this.guardarStorage();
 }
 
+// Obtener cliente
 obtenerCliente() {
   return this.cliente;
 }
 
+// Metodo para guardar en el storage
 private guardarStorage() {
   localStorage.setItem('carrito_items', JSON.stringify(this.items));
   localStorage.setItem('carrito_cliente', JSON.stringify(this.cliente));

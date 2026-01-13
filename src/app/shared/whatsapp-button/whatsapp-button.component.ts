@@ -8,6 +8,7 @@ import { CommonModule } from '@angular/common';
 
   templateUrl: './whatsapp-button.component.html'
 })
+
 export class WhatsappButtonComponent {
 
   phone = '573164883837';

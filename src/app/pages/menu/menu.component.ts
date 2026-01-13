@@ -25,14 +25,7 @@ export class MenuComponent implements OnInit {
   ngOnInit() {
     this.productos = this.productoService.obtenerProductos();
     this.productos.forEach(p => p.cantidad = 1);
-
   }
-
-  /* agregar(producto: Producto) {
-    this.carritoService.agregar(producto);
-    this.toast.mostrar('Producto agregado al pedido 🍟');
-   // alert('Producto agregado al carrito');
-  } */
 
   agregar(p: any,) {
     const cantidad = p.cantidad && p.cantidad > 0 ? p.cantidad : 1;

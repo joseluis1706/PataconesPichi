@@ -32,17 +32,20 @@ import { RouterLink } from '@angular/router';
     this.pago = cliente.pago;
   }
 
+  //Método actualizar en el componente
   actualizar() {
     this.items = this.carritoService.obtenerItems();
     this.total = this.carritoService.obtenerTotal();
   }
 
+  //Método eliminar en el componente
   eliminar(id: number) {
     this.carritoService.eliminar(id);
     this.actualizar();
     this.toast.mostrar('Producto eliminado ❌');
   }
 
+  //Método enviarWhatsApp en el componente
   enviarWhatsApp() {
     if (!this.nombre || !this.direccion) {
       this.toast.mostrar('Completa tus datos primero ⚠️');
