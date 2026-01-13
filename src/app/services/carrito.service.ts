@@ -75,7 +75,7 @@ export class CarritoService {
 
   // 📲 Enviar a WhatsApp
   enviarPedidoWhatsApp() {
-    const telefono = '573167585349';
+    const telefono = '573164883837';
 
     let mensaje = `🍟 *PEDIDO - Patacones el Pichi*%0A`;
     mensaje += `📍 Arjona, Bolívar%0A%0A`;
