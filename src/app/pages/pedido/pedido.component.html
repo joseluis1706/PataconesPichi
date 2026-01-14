@@ -17,13 +17,13 @@
         <div class="flex-1">
             <h3 class="font-bold text-lg">{{ item.producto.nombre }}</h3>
             <p class="text-gray-600">
-                $ {{ item.producto.precio }} x {{ item.cantidad }}
+                $ {{ item.producto.precio | number:'1.0-0' }} x {{ item.cantidad }}
             </p>
         </div>
 
         <div class="text-right">
             <p class="font-bold text-lg">
-                $ {{ item.producto.precio * item.cantidad }}
+                $ {{ item.producto.precio  * item.cantidad | number:'1.0-0' }}
             </p>
 
             <button (click)="eliminar(item.producto.id)" class="text-red-500 hover:text-red-700 text-xl">
@@ -36,7 +36,7 @@
     <div *ngIf="items.length > 0" class="bg-black text-white rounded-2xl p-6 mt-8
               flex justify-between items-center text-xl font-bold">
         <span>Total</span>
-        <span>$ {{ total }}</span>
+        <span>$ {{ total | number:'1.0-0' }}</span>
     </div>
 
     <div class="bg-white rounded-2xl shadow-md p-6 mb-8">

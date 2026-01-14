@@ -2,6 +2,11 @@ import { Injectable } from '@angular/core';
 import { Producto } from '../models/producto.model';
 import { CarritoItem } from '../models/carrito-item.model';
 
+export interface ItemCarrito {
+  producto: Producto;
+  cantidad: number;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -14,12 +19,14 @@ export class CarritoService {
     pago: 'Nequi'
   };
 
+  private key = 'carrito';
   private items: CarritoItem[] = [];
 
   constructor() {
     this.cargarStorage();
+    const data = localStorage.getItem(this.key);
+    this.items = data ? JSON.parse(data) : [];
    }
-
 
    //Metodo para cargar el storage
   private cargarStorage() {
@@ -37,17 +44,15 @@ export class CarritoService {
 
 
   // ➕ Agregar producto
-  agregar(producto: Producto, cantidad: number = 1) {
-    const item = this.items.find(i => i.producto.id === producto.id);
+  agregar(producto: Producto, cantidad: number) {
+    const existente = this.items.find(i => i.producto.id === producto.id);
 
-    if (item) {
-      item.cantidad++;
+    if (existente) {
+      existente.cantidad += cantidad;
     } else {
-      this.items.push({
-        producto,
-        cantidad
-      });
+      this.items.push({ producto, cantidad });
     }
+
     this.guardarStorage();
   }
 
@@ -59,16 +64,19 @@ export class CarritoService {
     this.guardarStorage();
   }
 
-  // 📦 Obtener items
-  obtenerItems(): CarritoItem[] {
+  obtenerItems() {
     return this.items;
+  }
+
+  totalItems() {
+    return this.items.reduce((t, i) => t + i.cantidad, 0);
   }
 
   // 💰 Total
   obtenerTotal(): number {
     return this.items.reduce(
       (total: number, item: CarritoItem) =>
-        total + item.producto.precio * item.cantidad,
+        total  + item.producto.precio * item.cantidad,
       0
     );
   }

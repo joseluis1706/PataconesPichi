@@ -7,6 +7,7 @@ export class ToastService {
 
   mensaje = '';
   visible = false;
+  
 
   mostrar(mensaje: string, tiempo = 2500) {
     this.mensaje = mensaje;

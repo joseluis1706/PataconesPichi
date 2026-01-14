@@ -3,6 +3,20 @@
         🍽️ Nuestro Menú
     </h2>
 
+    <div *ngIf="carritoService.totalItems() > 0" class="fixed bottom-6 right-6 z-50">
+    
+        <button (click)="irAPedido()" class="bg-green-500 hover:bg-green-600
+           text-white px-6 py-4 rounded-2xl
+           shadow-2xl font-bold flex items-center gap-3
+           transition active:scale-95">
+
+            <span class="text-3xl">🛒</span>
+            <span class="text-lg">{{ carritoService.totalItems() }}</span>             
+            <span class="hidden sm:inline">Ver pedido</span>
+        </button>
+    
+    </div>
+
     <div class="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
         <div *ngFor="let p of productos" class="bg-white rounded-2xl shadow-lg overflow-hidden
              hover:shadow-2xl hover:scale-105 transition">
@@ -21,20 +35,24 @@
                         Cantidad
                     </label>
 
-                    <input type="number" min="1" [(ngModel)]="p.cantidad" class="border rounded-lg px-2 py-1 text-center text-lg
+                    <input type="number" min="1" [(ngModel)]="p.cantidad" (ngModelChange)="validarCantidad(p)"
+                    class="border rounded-lg px-2 py-1 text-center text-lg
                     focus:outline-none focus:ring-2 focus:ring-yellow-400">
                 </div>
 
                 <!-- Precio -->
                 <p class="text-xl font-bold text-gray-800 mb-4">
-                    $ {{ p.precio }}
+                    $ {{ p.precio | number:'1.0-0' }}
                 </p>
 
-                <button (click)="agregar(p)" class="mt-auto bg-yellow-500 hover:bg-yellow-600
-                 text-white py-4 rounded-2xl font-bold text-lg transition active:scale-95">
+                <button (click)="agregar(p)" [disabled]="!p.cantidad || p.cantidad < 1" class="mt-auto py-4 rounded-2xl font-bold text-lg
+         transition active:scale-95
+         disabled:opacity-40 disabled:cursor-not-allowed
+         disabled:bg-gray-400
+         bg-yellow-500 hover:bg-yellow-600 text-white">
                     ➕ Agregar al pedido
                 </button>
             </div>
         </div>
-    </div>
+    </div>    
 </section>

@@ -5,6 +5,7 @@ import { CarritoService } from '../../services/carrito.service';
 import { Producto } from '../../models/producto.model';
 import { ToastService } from '../../services/toast.service';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-menu',
@@ -18,13 +19,18 @@ export class MenuComponent implements OnInit {
 
   constructor(
     private productoService: ProductoService,
-    private carritoService: CarritoService,
-    private toast: ToastService
+    public carritoService: CarritoService,
+    public toast: ToastService,
+    private router: Router
   ) { }
 
   ngOnInit() {
     this.productos = this.productoService.obtenerProductos();
     this.productos.forEach(p => p.cantidad = 1);
+  }
+
+  irAPedido() {
+    this.router.navigate(['/pedido']);
   }
 
   agregar(p: any,) {
@@ -34,4 +40,10 @@ export class MenuComponent implements OnInit {
     p.cantidad = 1;
   }
 
+  validarCantidad(p: Producto) {
+    if (!p.cantidad || p.cantidad < 1) {
+      p.cantidad = 0;
+      this.toast.mostrar('⚠️ La cantidad mínima es 1');
+    }
+  }
 }
